@@ -292,6 +292,22 @@ cd C:\Code\net_sec\frontend\presentation_layer
 C:\nvm\v20.18.0\npm.cmd run build
 ```
 
+## 第三方开源项目说明
+
+本项目基于多个第三方开源项目和模型/工具生态构建。公开发布、重新分发模型文件或打包项目时，请保留原项目的许可证和署名要求。
+
+- [GantMan/nsfw_model](https://github.com/GantMan/nsfw_model)：本地 NSFW 分类流程和 Grad-CAM-ready 重建流程所使用的 MobileNet/TensorFlow NSFW 模型基础来源。
+- TensorFlow / Keras：用于模型加载、推理和基于梯度的可视化解释。
+- OpenAI CLIP / `clip`：用于本地图像 embedding 生成和语义溯源召回。
+- FAISS：用于 CLIP embedding 候选的内存向量检索。
+- `ImageHash`：用于 pHash 感知哈希比较。
+- `ExifRead`：用于 EXIF 元数据提取。
+- FastAPI / Uvicorn / Pydantic：用于后端 API、请求解析和响应结构。
+- Vue 3、Vite、Element Plus、Vue Router：用于前端界面和本地开发构建。
+- 阿里云 Model Studio Qwen3-VL-Plus 或其他 OpenAI-compatible 多模态供应商：配置 API Key 后用于可选的大模型安全复核。
+
+模型权重、生成输出、本地测试样例图片和运行时数据库已通过 `.gitignore` 排除在 Git 之外。如需分享模型权重，建议使用 GitHub Releases、Git LFS 或明确的下载脚本，并同时附带上游许可证/声明文件。
+
 ## 说明
 
 - 默认检测模型是 `rebuild/nsfw_mobilenetv2_gradcam_ready.h5`。

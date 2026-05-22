@@ -384,6 +384,22 @@ cd C:\Code\net_sec
 .\.conda\image_violation\python.exe -c "import clip, torch, faiss, numpy as np; idx=faiss.IndexFlatIP(3); x=np.array([[1,0,0]], dtype='float32'); idx.add(x); print(idx.search(x, 1)[0][0][0])"
 ```
 
+## Third-Party Open Source
+
+This project builds on several third-party open-source projects and model/tooling ecosystems. Keep their original licenses and attribution requirements when publishing, redistributing model files, or packaging this project.
+
+- [GantMan/nsfw_model](https://github.com/GantMan/nsfw_model): NSFW MobileNet/TensorFlow model source used as the basis for the local NSFW classification workflow and Grad-CAM-ready rebuild process.
+- TensorFlow / Keras: model loading, inference, and gradient-based explanation implementation.
+- OpenAI CLIP / `clip`: local image embedding generation for semantic source retrieval.
+- FAISS: in-memory vector search for CLIP embedding candidates.
+- `ImageHash`: pHash-based perceptual hash comparison.
+- `ExifRead`: EXIF metadata extraction.
+- FastAPI / Uvicorn / Pydantic: backend API, request parsing, and response schemas.
+- Vue 3, Vite, Element Plus, and Vue Router: frontend UI and local development tooling.
+- Alibaba Cloud Model Studio Qwen3-VL-Plus or other OpenAI-compatible multimodal providers: optional external LLM safety review when an API key is configured.
+
+Large model weights, generated outputs, local sample images, and runtime databases are intentionally excluded from Git. If model weights are shared, prefer GitHub Releases, Git LFS, or a documented download script, and include the upstream license/notice files alongside them.
+
 ## Notes
 - Default model: `rebuild/nsfw_mobilenetv2_gradcam_ready.h5`.
 - Single-image detection is the primary supported frontend workflow.
