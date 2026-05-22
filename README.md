@@ -10,6 +10,38 @@ The current frontend is a Vue 3 + Element Plus app connected to the FastAPI back
 - ELA compression-anomaly analysis
 - LLM safety review for pornographic risk and source credibility
 
+## Demo Results and Workflow
+The screenshots in `image/` show the current single-image demo flow end to end. In this run, the uploaded image is classified as `neutral` with a top probability of `54.10%`. The detector also reports lower scores for `drawings` (`16.85%`), `sexy` (`14.73%`), `porn` (`11.88%`), and `hentai` (`2.44%`).
+
+![Classification scores, original image, and Grad-CAM heatmap](<image/屏幕截图 2026-05-22 112650.png>)
+
+The result page first shows the five-class probability distribution, then displays the original image beside the generated Grad-CAM heatmap. The explanation panel records the method (`gradcam`), target layer (`Conv_1`), and generated heatmap path under `outputs/explanations/gradcam/single/`.
+
+![Heatmap details and source evidence-chain overview](<image/屏幕截图 2026-05-22 112421.png>)
+
+After classification, the source-analysis card compares the current image against archived assets. The current example has a SHA-256 value, pHash fingerprint, and local CLIP embedding indexed with `clip:ViT-B/32`. It also has an ROI summary for the highlighted `sexy` region, covering `19.33%` of the image and comparing against an ROI library with 17 records.
+
+![Full-image source retrieval candidates](<image/屏幕截图 2026-05-22 112413.png>)
+
+The full-image retrieval section ranks archived source candidates. In this demo, the top candidate has `100.00%` CLIP semantic similarity, pHash distance `0`, and an exact SHA-256 match, so it is marked high credibility. Nearby candidates are still shown with their similarity, pHash, SHA-256, and evidence tags so reviewers can compare close or conflicting matches.
+
+![ROI local retrieval candidates](<image/屏幕截图 2026-05-22 112431.png>)
+
+The ROI local retrieval section repeats the comparison on the detected region instead of the whole image. It lists ROI semantic similarity, ROI pHash distance, historical bounding boxes, labels, and confidence level. This helps distinguish a whole-image source match from a local-region match when the heatmap focuses on only part of the image.
+
+![LLM safety review and evidence summary](<image/屏幕截图 2026-05-22 113117.png>)
+
+The LLM safety-review card combines detector scores, Grad-CAM coverage, SHA-256/pHash identity checks, CLIP retrieval, ELA, EXIF, and ROI evidence into a reviewer-facing summary. In this example, it reports low content risk and high source credibility, explains that the Grad-CAM region is likely non-explicit, and states that no human review is required for this specific result.
+
+Review sequence:
+1. Start the backend and frontend.
+2. Upload one image from the frontend.
+3. Read the classification summary and five-class probability chart.
+4. Inspect the original image and generated heatmap.
+5. Check the source evidence chain for SHA-256, pHash, CLIP/FAISS candidates, EXIF, and ELA.
+6. Compare full-image and ROI retrieval candidates when the evidence is close or conflicting.
+7. Use the LLM safety review as an audit assistant, not as the only decision source.
+
 ## Current Architecture
 - `backend/input_layer/api/`: FastAPI entrypoint and response schemas
 - `backend/detection_engine/tensorflow/`: TensorFlow model loading and prediction

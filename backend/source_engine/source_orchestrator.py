@@ -580,7 +580,7 @@ class SourceOrchestrator:
         evidence = []
         semantic_similarity = candidate.get("semantic_similarity")
         if isinstance(semantic_similarity, (int, float)):
-            level = "strong" if semantic_similarity >= 0.88 else "medium" if semantic_similarity >= 0.78 else "weak"
+            level = "strong" if semantic_similarity >= 0.88 else "medium" if semantic_similarity >= 0.60 else "weak"
             evidence.append(
                 {
                     "type": "semantic_clip",
@@ -652,7 +652,7 @@ class SourceOrchestrator:
                 return "needs_human_review"
             if semantic < 0.72 and phash_distance <= 6:
                 return "needs_human_review"
-            if semantic >= 0.78:
+            if semantic >= 0.60:
                 return "medium"
         if any(item["level"] == "medium" for item in evidence):
             return "medium"
