@@ -59,7 +59,7 @@ labels = ["a safe normal photo", "a violent bloody scene", "a photo with weapons
 + 修订版：模板 + 可选的多模态 LLM 增强解释
 ```
 
-**理由**：可调用免费的 Qwen-VL API 或本地 LLaVA 模型，让解释更自然、更详细。作为加分项，不影响核心流程。
+**理由**：可调用 Qwen-VL API 或本地 LLaVA 模型，让解释更自然、更详细。作为加分项，不影响核心流程。
 
 ---
 
