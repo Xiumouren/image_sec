@@ -1,0 +1,32 @@
+{
+  "comparisons": [
+    {
+      "image_path": "C:\\Code\\net_sec\\test_images\\1.png",
+      "original_top1": "neutral",
+      "rebuilt_top1": "neutral",
+      "max_abs_diff": 0.08752405643463135,
+      "mean_abs_diff": 0.035009630024433136
+    },
+    {
+      "image_path": "C:\\Code\\net_sec\\test_images\\2.png",
+      "original_top1": "neutral",
+      "rebuilt_top1": "neutral",
+      "max_abs_diff": 0.06539136171340942,
+      "mean_abs_diff": 0.026704704388976097
+    },
+    {
+      "image_path": "C:\\Code\\net_sec\\test_images\\3.jpg",
+      "original_top1": "neutral",
+      "rebuilt_top1": "neutral",
+      "max_abs_diff": 0.1843656301498413,
+      "mean_abs_diff": 0.07537791877985
+    },
+    {
+      "image_path": "C:\\Code\\net_sec\\test_images\\4.jpg",
+      "original_top1": "drawings",
+      "rebuilt_top1": "drawings",
+      "max_abs_diff": 0.24507451057434082,
+      "mean_abs_diff": 0.1013757586479187
+    }
+  ]
+}

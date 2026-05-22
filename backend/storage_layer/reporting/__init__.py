@@ -1,0 +1,1 @@
+"""Report storage helpers."""
